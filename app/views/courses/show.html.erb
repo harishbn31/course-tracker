@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+   <% @course.ratings.each do |rat|%>
+   <%= '*' * rat.rating   %>|
+   <%end%>
+</p>
+
+<h2> Student Enrolled</h2>
+<ol>
+	<%@course.students.each do |student| %>
+	<li><%= link_to student.name, student%></li>
+	<%end %>
+</ol>
+
+ <%= form_for @rating do |f| %>
+<h4> <%= f.label :rating %> <h4><br/>
+    <%= f.radio_button :rating, "1" %> 1
+    <%= f.radio_button :rating, "2" %> 2
+    <%= f.radio_button :rating, "3" %> 3
+    <%= f.radio_button :rating, "4" %> 4
+    
+    <%= f.radio_button :rating, "5" %> 5 <br/>
+    <%= f.hidden_field :course_id, value:@course.id%>
+    <%= f.submit %>
+   <%end%>
+<p>
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>
+</p>
